@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_assignment"
+            android:title="Assignment" />
+        <item
+            android:id="@+id/nav_seminar"
+            android:title="Seminar" />
+        <item
+            android:id="@+id/nav_iexam"
+            android:title="Internal Exam" />
+        <item
+            android:id="@+id/nav_mark"
+            android:title="Mark" />
+        <item
+            android:id="@+id/nav_tt"
+            android:title="Time Table" />
+        <item
+            android:id="@+id/nav_newsem"
+            android:title="New Semester" />
+    </group>
+
+    <item android:title="Coming soon">
+        <menu>
+            <item
+                android:id="@+id/nav_history"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_attendance"
+                android:title="Attendance" />
+        </menu>
+    </item>
+
+</menu>
