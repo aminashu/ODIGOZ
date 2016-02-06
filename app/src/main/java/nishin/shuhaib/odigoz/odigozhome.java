@@ -3,7 +3,9 @@ package nishin.shuhaib.odigoz;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -17,20 +19,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 public class odigozhome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FragmentTransaction ft;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+    CoordinatorLayout coordinatorlayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_odigozhome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ft= getFragmentManager().beginTransaction();
-        Fragment fragment=new Home();
+        ft = getFragmentManager().beginTransaction();
+        Fragment fragment = new Home();
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
-
+        coordinatorlayout= (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +60,9 @@ public class odigozhome extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -57,33 +72,31 @@ public class odigozhome extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment;
         if (id == R.id.nav_home) {
-            ft= getFragmentManager().beginTransaction();
-            fragment=new Home();
+            ft = getFragmentManager().beginTransaction();
+            fragment = new Home();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
 
         } else if (id == R.id.nav_assignment) {
-            ft= getFragmentManager().beginTransaction();
-            fragment=new Assignment();
+            ft = getFragmentManager().beginTransaction();
+            fragment = new Assignment();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
         } else if (id == R.id.nav_seminar) {
-            Toast.makeText(getBaseContext(),"Seminar",Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Seminar", Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.nav_iexam) {
-            Toast.makeText(getBaseContext(),"Internal Exam",Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Internal Exam", Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.nav_mark) {
-            Toast.makeText(getBaseContext(),"Mark",Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Mark", Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.nav_tt) {
-            Toast.makeText(getBaseContext(),"Time Table",Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Time Table", Toast.LENGTH_LONG).show();
 
+        } else if (id == R.id.nav_newsem) {
+            Toast.makeText(getBaseContext(), "New Semester", Toast.LENGTH_LONG).show();
         }
-        else if (id == R.id.nav_newsem) {
-            Toast.makeText(getBaseContext(),"New Semester",Toast.LENGTH_LONG).show();
-        }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -92,6 +105,7 @@ public class odigozhome extends AppCompatActivity
 
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -118,7 +132,7 @@ public class odigozhome extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(getBaseContext(),"Assignment",Toast.LENGTH_LONG).show();
+            Snackbar.make(coordinatorlayout,"Hello Settings",Snackbar.LENGTH_INDEFINITE).show();
             return true;
         }
         if (id == R.id.action_set) {
@@ -127,6 +141,46 @@ public class odigozhome extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "odigozhome Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://nishin.shuhaib.odigoz/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "odigozhome Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://nishin.shuhaib.odigoz/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 
     //@SuppressWarnings("StatementWithEmptyBody")
